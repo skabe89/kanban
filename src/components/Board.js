@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import Card from './Card'
 import Form from './Form'
+import ProjectName from './ProjectName'
+
 
 export default function Board() {
 
   const [cards, setCards] = useState([])
   const [current, setCurrent] = useState("")
+  const [projectName, setProjectName] = useState("")
   
   const addCard = (card) => {
     if(card.name && card.description){
@@ -22,10 +25,14 @@ export default function Board() {
     console.log(e.target.key)
   }
 
+  const handleProName = (name) => {
+    setProjectName(name)
+  }
+
   return (
     <div>
-      <h1>Board</h1>
-        <Form addCard={addCard}/>
+      <h1>{projectName}</h1>
+      { projectName === "" ? <ProjectName handleProName={handleProName} /> : <Form addCard={addCard}/> }
         <div className="all-container">
         <div className="row">
           <div className="flex-container">
